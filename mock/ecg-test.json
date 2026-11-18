@@ -1,0 +1,33 @@
+{
+  "knownInput": {
+    "age": 20,
+    "heightCm": 160,
+    "weightKg": 50
+  },
+  "expectedKnownSample": {
+    "sampleId": "ecg-001",
+    "age": 20,
+    "heightCm": 160,
+    "weightKg": 50,
+    "source": "synthetic_teaching_fixture",
+    "heartRate": 60,
+    "durationSeconds": 60,
+    "waveform": [
+      0,
+      0.1,
+      0,
+      -0.15,
+      1,
+      -0.3,
+      0,
+      0.2,
+      0
+    ]
+  },
+  "unseenInput": {
+    "age": 97,
+    "heightCm": 172,
+    "weightKg": 81
+  },
+  "note": "已知样本用于检索匹配验证；未知样本不得声称命中已有切片。"
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.device.mapper.HealthDeviceMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.device.domain.HealthDevice"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="deviceName" column="device_name"/>
+<result property="deviceType" column="device_type"/>
+<result property="serialNumber" column="serial_number"/>
+<result property="status" column="status"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, device_name, device_type, serial_number, status FROM t_health_device <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="deviceName != null"> AND device_name LIKE CONCAT('%', #{deviceName}, '%')</if>
+<if test="deviceType != null"> AND device_type LIKE CONCAT('%', #{deviceType}, '%')</if>
+<if test="serialNumber != null"> AND serial_number LIKE CONCAT('%', #{serialNumber}, '%')</if>
+<if test="status != null"> AND status LIKE CONCAT('%', #{status}, '%')</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, device_name, device_type, serial_number, status FROM t_health_device WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_health_device (user_id, device_name, device_type, serial_number, status) VALUES (#{userId}, #{deviceName}, #{deviceType}, #{serialNumber}, #{status})</insert>
+ <update id="update">UPDATE t_health_device SET user_id=#{userId}, device_name=#{deviceName}, device_type=#{deviceType}, serial_number=#{serialNumber}, status=#{status} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_health_device WHERE id=#{id}</delete>
+</mapper>

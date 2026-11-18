@@ -1,0 +1,35 @@
+name: myhealthy-course
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: myhealthy_course
+      MYSQL_USER: myhealthy
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports: ["127.0.0.1:13316:3306"]
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d:ro
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci", "--default-time-zone=+08:00"]
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 50
+  redis:
+    image: redis:7.4-alpine
+    ports: ["127.0.0.1:16379:6379"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: ["redis_data:/data"]
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports: ["127.0.0.1:15673:5672", "127.0.0.1:15674:15672"]
+    environment:
+      RABBITMQ_DEFAULT_USER: myhealthy
+      RABBITMQ_DEFAULT_PASS: ${MYSQL_PASSWORD}
+    volumes: ["rabbit_data:/var/lib/rabbitmq"]
+volumes:
+  mysql_data:
+  redis_data:
+  rabbit_data:

@@ -1,0 +1,15 @@
+**/target/
+**/node_modules/
+**/dist/
+.env
+*.local.yml
+*.local.json
+logs/
+runtime/
+.env.local
+.env.*.local
+*.log
+*.pem
+*.key
+*.p12
+*.jks

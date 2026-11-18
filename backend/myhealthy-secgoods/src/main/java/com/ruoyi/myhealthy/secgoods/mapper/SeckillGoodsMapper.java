@@ -1,0 +1,1 @@
+package com.ruoyi.myhealthy.secgoods.mapper;import java.util.List;import com.ruoyi.myhealthy.secgoods.domain.SeckillGoods;public interface SeckillGoodsMapper{List<SeckillGoods> selectList();}

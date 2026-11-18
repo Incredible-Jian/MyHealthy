@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.tuser.mapper.PatientProfileMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.tuser.domain.PatientProfile"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="realName" column="real_name"/>
+<result property="age" column="age"/>
+<result property="heightCm" column="height_cm"/>
+<result property="weightKg" column="weight_kg"/>
+<result property="phone" column="phone"/>
+<result property="practitionerId" column="practitioner_id"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, real_name, age, height_cm, weight_kg, phone, practitioner_id FROM t_patient_profile <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="realName != null"> AND real_name LIKE CONCAT('%', #{realName}, '%')</if>
+<if test="age != null"> AND age = #{age}</if>
+<if test="heightCm != null"> AND height_cm = #{heightCm}</if>
+<if test="weightKg != null"> AND weight_kg = #{weightKg}</if>
+<if test="phone != null"> AND phone LIKE CONCAT('%', #{phone}, '%')</if>
+<if test="practitionerId != null"> AND practitioner_id = #{practitionerId}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, real_name, age, height_cm, weight_kg, phone, practitioner_id FROM t_patient_profile WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_patient_profile (user_id, real_name, age, height_cm, weight_kg, phone, practitioner_id) VALUES (#{userId}, #{realName}, #{age}, #{heightCm}, #{weightKg}, #{phone}, #{practitionerId})</insert>
+ <update id="update">UPDATE t_patient_profile SET user_id=#{userId}, real_name=#{realName}, age=#{age}, height_cm=#{heightCm}, weight_kg=#{weightKg}, phone=#{phone}, practitioner_id=#{practitionerId} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_patient_profile WHERE id=#{id}</delete>
+</mapper>

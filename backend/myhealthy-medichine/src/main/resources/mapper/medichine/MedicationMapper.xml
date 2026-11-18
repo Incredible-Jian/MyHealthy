@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.medichine.mapper.MedicationMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.medichine.domain.Medication"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="medicineName" column="medicine_name"/>
+<result property="dosage" column="dosage"/>
+<result property="frequency" column="frequency"/>
+<result property="startDate" column="start_date"/>
+<result property="endDate" column="end_date"/>
+<result property="notes" column="notes"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, medicine_name, dosage, frequency, start_date, end_date, notes FROM t_medication <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="medicineName != null"> AND medicine_name LIKE CONCAT('%', #{medicineName}, '%')</if>
+<if test="dosage != null"> AND dosage LIKE CONCAT('%', #{dosage}, '%')</if>
+<if test="frequency != null"> AND frequency LIKE CONCAT('%', #{frequency}, '%')</if>
+<if test="startDate != null"> AND start_date = #{startDate}</if>
+<if test="endDate != null"> AND end_date = #{endDate}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, medicine_name, dosage, frequency, start_date, end_date, notes FROM t_medication WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_medication (user_id, medicine_name, dosage, frequency, start_date, end_date, notes) VALUES (#{userId}, #{medicineName}, #{dosage}, #{frequency}, #{startDate}, #{endDate}, #{notes})</insert>
+ <update id="update">UPDATE t_medication SET user_id=#{userId}, medicine_name=#{medicineName}, dosage=#{dosage}, frequency=#{frequency}, start_date=#{startDate}, end_date=#{endDate}, notes=#{notes} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_medication WHERE id=#{id}</delete>
+</mapper>

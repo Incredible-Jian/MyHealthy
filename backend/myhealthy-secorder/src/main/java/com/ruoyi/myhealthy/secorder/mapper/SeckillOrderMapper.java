@@ -1,0 +1,1 @@
+package com.ruoyi.myhealthy.secorder.mapper;import java.util.List;import com.ruoyi.myhealthy.secorder.domain.SeckillOrder;public interface SeckillOrderMapper{List<SeckillOrder> selectList();}

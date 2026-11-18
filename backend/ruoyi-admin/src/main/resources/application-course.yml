@@ -1,0 +1,31 @@
+server:
+  port: 18080
+  address: 127.0.0.1
+ruoyi:
+  name: 慢病健康医疗管理系统
+  profile: ${COURSE_UPLOAD_PATH:./runtime/uploads}
+spring:
+  datasource:
+    druid:
+      master:
+        url: jdbc:mysql://127.0.0.1:13316/myhealthy_course?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        username: myhealthy
+        password: ${MYSQL_PASSWORD}
+  redis:
+    host: 127.0.0.1
+    port: 16379
+  rabbitmq:
+    publisher-confirm-type: correlated
+    host: 127.0.0.1
+    port: 15673
+    username: myhealthy
+    password: ${MYSQL_PASSWORD}
+token:
+  secret: ${TOKEN_SECRET}
+health:
+  demo-pay:
+    enabled: true
+  coze:
+    enabled: false
+  alipay:
+    enabled: false

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.record.mapper.FollowUpMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.record.domain.FollowUp"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="practitionerId" column="practitioner_id"/>
+<result property="visitTime" column="visit_time"/>
+<result property="content" column="content"/>
+<result property="nextVisitTime" column="next_visit_time"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, practitioner_id, visit_time, content, next_visit_time FROM t_follow_up <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="practitionerId != null"> AND practitioner_id = #{practitionerId}</if>
+<if test="visitTime != null"> AND visit_time = #{visitTime}</if>
+<if test="nextVisitTime != null"> AND next_visit_time = #{nextVisitTime}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, practitioner_id, visit_time, content, next_visit_time FROM t_follow_up WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_follow_up (user_id, practitioner_id, visit_time, content, next_visit_time) VALUES (#{userId}, #{practitionerId}, #{visitTime}, #{content}, #{nextVisitTime})</insert>
+ <update id="update">UPDATE t_follow_up SET user_id=#{userId}, practitioner_id=#{practitionerId}, visit_time=#{visitTime}, content=#{content}, next_visit_time=#{nextVisitTime} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_follow_up WHERE id=#{id}</delete>
+</mapper>

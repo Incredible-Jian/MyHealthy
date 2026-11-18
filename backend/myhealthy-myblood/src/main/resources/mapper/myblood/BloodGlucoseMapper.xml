@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.myblood.mapper.BloodGlucoseMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.myblood.domain.BloodGlucose"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="deviceId" column="device_id"/>
+<result property="measureTime" column="measure_time"/>
+<result property="glucose" column="glucose"/>
+<result property="mealState" column="meal_state"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, device_id, measure_time, glucose, meal_state FROM t_blood_glucose <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="deviceId != null"> AND device_id = #{deviceId}</if>
+<if test="measureTime != null"> AND measure_time = #{measureTime}</if>
+<if test="glucose != null"> AND glucose = #{glucose}</if>
+<if test="mealState != null"> AND meal_state LIKE CONCAT('%', #{mealState}, '%')</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, device_id, measure_time, glucose, meal_state FROM t_blood_glucose WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_blood_glucose (user_id, device_id, measure_time, glucose, meal_state) VALUES (#{userId}, #{deviceId}, #{measureTime}, #{glucose}, #{mealState})</insert>
+ <update id="update">UPDATE t_blood_glucose SET user_id=#{userId}, device_id=#{deviceId}, measure_time=#{measureTime}, glucose=#{glucose}, meal_state=#{mealState} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_blood_glucose WHERE id=#{id}</delete>
+</mapper>

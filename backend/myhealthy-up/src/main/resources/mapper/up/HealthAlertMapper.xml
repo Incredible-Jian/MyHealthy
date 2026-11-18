@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.up.mapper.HealthAlertMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.up.domain.HealthAlert"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="measurementType" column="measurement_type"/>
+<result property="measurementId" column="measurement_id"/>
+<result property="severity" column="severity"/>
+<result property="message" column="message"/>
+<result property="status" column="status"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, measurement_type, measurement_id, severity, message, status FROM t_health_alert <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="measurementType != null"> AND measurement_type LIKE CONCAT('%', #{measurementType}, '%')</if>
+<if test="measurementId != null"> AND measurement_id = #{measurementId}</if>
+<if test="severity != null"> AND severity LIKE CONCAT('%', #{severity}, '%')</if>
+<if test="status != null"> AND status LIKE CONCAT('%', #{status}, '%')</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, measurement_type, measurement_id, severity, message, status FROM t_health_alert WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_health_alert (user_id, measurement_type, measurement_id, severity, message, status) VALUES (#{userId}, #{measurementType}, #{measurementId}, #{severity}, #{message}, #{status})</insert>
+ <update id="update">UPDATE t_health_alert SET user_id=#{userId}, measurement_type=#{measurementType}, measurement_id=#{measurementId}, severity=#{severity}, message=#{message}, status=#{status} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_health_alert WHERE id=#{id}</delete>
+</mapper>

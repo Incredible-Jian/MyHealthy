@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.report.mapper.HealthReportMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.report.domain.HealthReport"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="title" column="title"/>
+<result property="content" column="content"/>
+<result property="source" column="source"/>
+<result property="status" column="status"/>
+<result property="reviewerId" column="reviewer_id"/>
+<result property="reviewedAt" column="reviewed_at"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, title, content, source, status, reviewer_id, reviewed_at FROM t_health_report <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="title != null"> AND title LIKE CONCAT('%', #{title}, '%')</if>
+<if test="source != null"> AND source LIKE CONCAT('%', #{source}, '%')</if>
+<if test="status != null"> AND status LIKE CONCAT('%', #{status}, '%')</if>
+<if test="reviewerId != null"> AND reviewer_id = #{reviewerId}</if>
+<if test="reviewedAt != null"> AND reviewed_at = #{reviewedAt}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, title, content, source, status, reviewer_id, reviewed_at FROM t_health_report WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_health_report (user_id, title, content, source, status, reviewer_id, reviewed_at) VALUES (#{userId}, #{title}, #{content}, #{source}, #{status}, #{reviewerId}, #{reviewedAt})</insert>
+ <update id="update">UPDATE t_health_report SET user_id=#{userId}, title=#{title}, content=#{content}, source=#{source}, status=#{status}, reviewer_id=#{reviewerId}, reviewed_at=#{reviewedAt} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_health_report WHERE id=#{id}</delete>
+</mapper>

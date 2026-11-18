@@ -1,0 +1,1 @@
+package com.ruoyi.myhealthy.secpay.mapper;import java.util.List;import com.ruoyi.myhealthy.secpay.domain.SeckillPayment;public interface SeckillPaymentMapper{List<SeckillPayment> selectList();}

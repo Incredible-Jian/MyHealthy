@@ -1,0 +1,2 @@
+SET NAMES utf8mb4;
+INSERT INTO t_health_article(title,content,media_type,media_url) VALUES ('记录健康指标 操作视频','原创12秒软件教学视频，非医学建议。','video','/media/recording.mp4'),('查看趋势与报告 操作视频','原创12秒软件教学视频，非医学建议。','video','/media/trends.mp4');

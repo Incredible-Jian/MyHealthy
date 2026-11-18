@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.analysis.mapper.HealthAnalysisMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.analysis.domain.HealthAnalysis"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="periodStart" column="period_start"/>
+<result property="periodEnd" column="period_end"/>
+<result property="summary" column="summary"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, period_start, period_end, summary FROM t_health_analysis <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="periodStart != null"> AND period_start = #{periodStart}</if>
+<if test="periodEnd != null"> AND period_end = #{periodEnd}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, period_start, period_end, summary FROM t_health_analysis WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_health_analysis (user_id, period_start, period_end, summary) VALUES (#{userId}, #{periodStart}, #{periodEnd}, #{summary})</insert>
+ <update id="update">UPDATE t_health_analysis SET user_id=#{userId}, period_start=#{periodStart}, period_end=#{periodEnd}, summary=#{summary} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_health_analysis WHERE id=#{id}</delete>
+</mapper>

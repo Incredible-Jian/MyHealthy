@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.myhealthy.heart.mapper.EcgRecordMapper">
+ <resultMap id="row" type="com.ruoyi.myhealthy.heart.domain.EcgRecord"><result property="id" column="id"/>
+<result property="userId" column="user_id"/>
+<result property="deviceId" column="device_id"/>
+<result property="measureTime" column="measure_time"/>
+<result property="heartRate" column="heart_rate"/>
+<result property="durationSeconds" column="duration_seconds"/>
+<result property="waveform" column="waveform"/></resultMap>
+ <select id="selectList" resultMap="row">SELECT id, user_id, device_id, measure_time, heart_rate, duration_seconds, waveform FROM t_ecg_record <where><if test="id != null"> AND id = #{id}</if>
+<if test="userId != null"> AND user_id = #{userId}</if>
+<if test="deviceId != null"> AND device_id = #{deviceId}</if>
+<if test="measureTime != null"> AND measure_time = #{measureTime}</if>
+<if test="heartRate != null"> AND heart_rate = #{heartRate}</if>
+<if test="durationSeconds != null"> AND duration_seconds = #{durationSeconds}</if></where> ORDER BY id DESC</select>
+ <select id="selectById" resultMap="row">SELECT id, user_id, device_id, measure_time, heart_rate, duration_seconds, waveform FROM t_ecg_record WHERE id=#{id}</select>
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id">INSERT INTO t_ecg_record (user_id, device_id, measure_time, heart_rate, duration_seconds, waveform) VALUES (#{userId}, #{deviceId}, #{measureTime}, #{heartRate}, #{durationSeconds}, #{waveform})</insert>
+ <update id="update">UPDATE t_ecg_record SET user_id=#{userId}, device_id=#{deviceId}, measure_time=#{measureTime}, heart_rate=#{heartRate}, duration_seconds=#{durationSeconds}, waveform=#{waveform} WHERE id=#{id}</update>
+ <delete id="delete">DELETE FROM t_ecg_record WHERE id=#{id}</delete>
+</mapper>
