@@ -4,7 +4,7 @@ MyHealthy 是课程实训项目，包含患者端、管理端和 Java 后端。�
 
 ## 在 Windows 上部署
 
-准备 Git、已启动的 Docker Desktop（Linux 容器）、JDK 11（或课程使用的 JDK 18）、Maven 3.9 和 Node.js 22。使用 PowerShell，先确认 `docker compose version`、`java -version`、`mvn -version` 和 `node -v` 可用。首次构建需要联网下载镜像和依赖。
+准备 Git、已启动的 Docker Desktop（Linux 容器）、JDK 11（或课程使用的 JDK 18）、Maven 3.9 和 Node.js 22。使用 PowerShell，先确认 `docker compose version`、`java -version`、`mvn -version` 和 `node -v` 可用。将 `JAVA_HOME` 指向 JDK 安装目录，并用 `mvn -version` 检查 Maven 所用的 Java 版本。启动脚本优先使用 `JAVA_HOME`，以避免 PATH 中的其他 Java 启动程序干扰。首次构建需要联网下载镜像和依赖。
 
 ### 1. 克隆项目，启动基础服务
 
